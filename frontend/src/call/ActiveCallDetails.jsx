@@ -1,20 +1,17 @@
 import AssistantSpeechIndicator from "./AssistantSpeechIndicator";
 import VolumeLevel from "./VolumeLevel";
 
-const ActiveCallDetails = ({
-  assistantIsSpeaking,
-  volumeLevel,
-  endCallCallback,
-}) => {
+const ActiveCallDetails = ({ assistantIsSpeaking, volumeLevel, callId }) => {
   return (
-    <div className="active-call-detail">
-      <div className="call-info">
+    <div className="active-call-surface">
+      <div className="call-status">
         <AssistantSpeechIndicator isSpeaking={assistantIsSpeaking} />
-        <VolumeLevel volume={volumeLevel} />
+        <dl className="call-meta">
+          <dt className="meta-label">Session ID</dt>
+          <dd className="meta-value">{callId || "Pending..."}</dd>
+        </dl>
       </div>
-      <div className="end-call-button">
-        <button onClick={endCallCallback}>End Call</button>
-      </div>
+      <VolumeLevel volume={volumeLevel} />
     </div>
   );
 };
